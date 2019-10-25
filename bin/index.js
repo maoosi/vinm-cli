@@ -3,8 +3,8 @@
 
 const meow = require('meow')
 const logger = require('./lib/logger.js')
-const getConfig = require('./lib/config.js').default
-const getOptions = require('./lib/options.js').default
+const getVinmYmlFile = require('./lib/yml.js').default
+const getStageVars = require('./lib/options.js').default
 const getTasks = require('./lib/tasks.js').default
 const run = require('./lib/runner.js').default
 
@@ -48,8 +48,11 @@ const exec = async () => {
     require('events').EventEmitter.defaultMaxListeners = 80
 
     try {
-        const config = await getConfig()
-        const options = await getOptions(config, cli.flags['stage'])
+        const config = await getVinmYmlFile()
+        const options = await getStageVars(config, cli.flags['stage'])
+        const forceAll = typeof cli.flags['force'] !== 'undefined'
+            ? cli.flags['force']
+            : false
 
         options['vinm.port'] = typeof cli.flags['port'] !== 'undefined'
             ? cli.flags['port']
@@ -64,7 +67,7 @@ const exec = async () => {
                 config,
                 pipeline,
                 options,
-                typeof cli.flags['force'] !== 'undefined'
+                forceAll
             )
 
             logger.log('start', `${pipeline}`, `[pipeline]`)
