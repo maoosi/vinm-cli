@@ -8,6 +8,9 @@
     "bin": {
         "vinm": "bin/index.js"
     },
+    "scripts": {
+        "test": "jest"
+    },
     "dependencies": {
         "js-yaml": "^3.13.1",
         "lodash.flattendeep": "^4.4.0",
@@ -17,6 +20,7 @@
         "socket.io": "^2.2.0"
     },
     "devDependencies": {
+        "jest": "^24.9.0",
         "public-ip": "^3.2.0",
         "vinm.emitter": "^1.0.0"
     }

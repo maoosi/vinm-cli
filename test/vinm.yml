@@ -1,0 +1,32 @@
+stages:
+    dev:
+        stage: dev
+        delay: 3000
+    staging:
+        stage: staging
+        delay: 5000
+
+pipelines:
+    test:
+        - task: exec-myip
+        - task: wait-three-seconds
+        - task: wait-three-seconds
+          active: false
+        - task: output-ip
+
+tasks:
+
+    exec-myip:
+        description: Execute simple Node.js function to read IP address
+        shell: >-
+            node -e "require(\"./index.js\").myip()"
+
+    wait-three-seconds:
+        description: Use a stage var `$vinm.delay` as function parameter
+        shell: >-
+            node -e "require(\"./index.js\").wait($vinm.delay)"
+
+    output-ip:
+        description: Output `$vinm.ip` dynamic var injected by `exec-myip` task
+        shell: >-
+            echo "Your IP address is $vinm.ip"
