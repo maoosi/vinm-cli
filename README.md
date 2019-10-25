@@ -67,10 +67,11 @@ Usage
     $ vinm @<task> <options>
 
 Options
-    --stage, -s  Stage vars to use
-    --port, -p   Vinm emitter port   # optional
-    --force, -f  Force run inactive  # optional
-    --help, -h   Show help           # optional
+    --stage, -s     Stage vars to use
+    --port, -p      Vinm emitter port    # optional
+    --force, -f     Force run all tasks  # optional
+    --help, -h      Show help            # optional
+    --version, -v   Current version      # optional 
 
 Examples
     $ vinm deploy --stage dev       # run 'deploy' pipeline
