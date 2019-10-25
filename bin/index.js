@@ -14,34 +14,39 @@ const cli = meow(`
       $ vinm @<task> <options>
 
 	Options
-      --stage, -s  Stage vars to use
-      --port, -p   Vinm emitter port   # optional
-      --force, -f  Force run inactive  # optional
-      --help, -h   Show help           # optional
+      --stage, -s     Stage vars to use
+      --port, -p      Vinm emitter port    # optional
+      --force, -f     Force run all tasks  # optional
+      --help, -h      Show help            # optional
+      --version, -v   Current version      # optional 
 
 	Examples
       $ vinm deploy --stage dev       # run 'deploy' pipeline
       $ vinm @api-create --stage dev  # run 'api-create' task
 `, {
-	flags: {
-		stage: {
-			type: 'string',
-			alias: 's'
+    flags: {
+        stage: {
+            type: 'string',
+            alias: 's'
         },
         port: {
-			type: 'string',
-			alias: 'p'
+            type: 'string',
+            alias: 'p'
         },
         force: {
-			type: 'boolean',
+            type: 'boolean',
             alias: 'f',
             default: false
         },
         help: {
-			type: 'string',
-			alias: 'h'
-		}
-	}
+            type: 'string',
+            alias: 'h'
+        },
+        version: {
+            type: 'string',
+            alias: 'v'
+        }
+    }
 })
 
 const exec = async () => {
@@ -82,7 +87,11 @@ const exec = async () => {
     }
 }
 
-if (
+if (typeof cli.flags['version'] !== 'undefined') {
+    const packageJson = require('../package.json')
+    logger.log('log', packageJson.version)
+    process.exit()
+} else if (
     cli.input.length > 0 &&
     typeof cli.flags['stage'] !== 'undefined' &&
     typeof cli.flags['help'] === 'undefined'
