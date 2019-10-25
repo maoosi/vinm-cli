@@ -14,6 +14,8 @@ pipelines:
     basic:
         - task: exec-myip
         - task: wait-three-seconds
+        - task: wait-three-seconds
+          active: false
         - task: output-ip
 
 tasks:
