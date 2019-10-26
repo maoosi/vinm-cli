@@ -1,0 +1,10 @@
+stages:
+    - test
+
+run_tests:
+    stage: test
+    image: node:10
+    before_script:
+        - yarn install
+    script:
+        - yarn test
