@@ -1,5 +1,7 @@
 # Vīnm CLI
 
+[![pipeline status](https://gitlab.com/vinm/vinm-cli/badges/master/pipeline.svg)](https://gitlab.com/vinm/vinm-cli/commits/master)
+
 > Tiny CLI that help developers create robust execution pipelines.
 
 It can be challenging to deploy microservices architectures at scale, even more, if you like to create decoupled infrastructures as code. Vinm is a tiny CLI that help developers create robust execution pipelines and reduce software deployment anxiety.
