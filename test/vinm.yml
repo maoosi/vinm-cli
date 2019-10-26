@@ -1,3 +1,6 @@
+plugins:
+    - ./vinm-plugin-utils
+
 stages:
     dev:
         stage: dev
@@ -17,9 +20,9 @@ pipelines:
 tasks:
 
     exec-myip:
-        description: Execute simple Node.js function to read IP address
+        description: Use vinm-plugin-utils to read IP address
         shell: >-
-            node -e "require(\"./index.js\").myip()"
+            vinm@utils --exec "myip" --vinmVar "ip"
 
     wait-three-seconds:
         description: Use a stage var `$vinm.delay` as function parameter

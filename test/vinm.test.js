@@ -3,6 +3,7 @@ const path = require('path')
 
 // functions to test
 const getTasks = require('../bin/lib/tasks.js').default
+const injectPlugins = require('../bin/lib/plugins.js').default
 const getVinmYmlFile = require('../bin/lib/yml.js').default
 
 // store process
@@ -12,7 +13,11 @@ const realProcess = process
 var config = false
 beforeEach(async (done) => {
     jest.resetModules()
-    process = { ...realProcess, cwd: () => path.join(realProcess.cwd(), '/test/')}
+    process = {
+        ...realProcess,
+        cwd: () => path.join(realProcess.cwd(), '/test/'),
+        exit: () => {}
+    }
     config = await getVinmYmlFile()
     done()
 })
@@ -32,6 +37,16 @@ describe('Tasks', () => {
     test('All tasks should be executed with --force', async () => {
         let tasks = await getTasks(config, 'test', {}, true)
         expect(tasks.length).toBe(4)
+    })
+
+})
+
+// plugins
+describe('Plugins', () => {
+
+    test('Plugin system should allow to modify tasks on-the-fly', async () => {
+        let tasks = await getTasks(await injectPlugins(config), 'test', {}, true)
+        expect(tasks[0].shell).toEqual(expect.not.stringContaining('vinm@utils'))
     })
 
 })

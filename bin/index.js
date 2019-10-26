@@ -7,6 +7,7 @@ const getVinmYmlFile = require('./lib/yml.js').default
 const getStageVars = require('./lib/options.js').default
 const getTasks = require('./lib/tasks.js').default
 const run = require('./lib/runner.js').default
+const injectPlugins = require('./lib/plugins.js').default
 
 const cli = meow(`
 	Usage
@@ -54,6 +55,7 @@ const exec = async () => {
 
     try {
         const config = await getVinmYmlFile()
+        config = await injectPlugins(config)
         const options = await getStageVars(config, cli.flags['stage'])
         const forceAll = typeof cli.flags['force'] !== 'undefined'
             ? cli.flags['force']
