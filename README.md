@@ -15,7 +15,6 @@ Few things Vinm can help with:
 
 - [ ] Finish writing tests
 - [ ] Add examples for different use cases
-- [ ] Show tasks/pipelines report after execution
 
 
 ## 📦 CLI installation

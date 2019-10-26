@@ -63,6 +63,9 @@ const exec = async () => {
             ? cli.flags['port']
             : 4173
 
+        let reportResults = []
+        console.log('')
+
         for (const pipeline of cli.input) {
             if (pipeline.includes('@')) {
                 config.pipelines[pipeline] = [{ task: pipeline.replace('@', '') }]
@@ -76,9 +79,27 @@ const exec = async () => {
             )
 
             logger.log('start', `${pipeline}`, `[pipeline]`)
-            await run(tasks, options)
-            logger.log('success', `${pipeline}`, `[pipeline]`)
+            reportResults.push({
+                pipeline: pipeline,
+                tasks: await run(tasks, options)
+            })
+            let error = reportResults[reportResults.length - 1].tasks.filter(t => !t.success).length
+            logger.log(error ? 'warn' : 'success', `${pipeline}`, `[pipeline]`)
         }
+
+        let reportSummary = ``
+        console.log('')
+        logger.log('log', `\n$ Vinm CLI, report summary:`)
+        reportResults.forEach(p => {
+            let [passed, failed, total] = [0, 0, 0]
+            p.tasks.forEach(t => {
+                if (t.success) passed++
+                else failed++
+                total++
+            })
+            reportSummary += `\nPipeline [${p.pipeline}]: ${passed} passed, ${failed} failed, ${total} total`
+            logger.log(failed > 0 ? 'error' : 'success', reportSummary)
+        })
 
         process.exit()
     } catch (err) {
