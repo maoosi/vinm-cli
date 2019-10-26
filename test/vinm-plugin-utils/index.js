@@ -1,4 +1,4 @@
-const vinm = require('vinm.emitter')()
+const vinm = require('vinm-nodejs-emitter')()
 const publicIp = require('public-ip')
 
 const myip = async ({ vinmVar }) => {

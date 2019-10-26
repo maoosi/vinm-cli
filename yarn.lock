@@ -4146,10 +4146,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vinm.emitter@^1.0.0:
+vinm-nodejs-emitter@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/vinm.emitter/-/vinm.emitter-1.0.0.tgz#0160bf07917e3212ba9ce6e6c0ada071dd7b4f22"
-  integrity sha512-PhDwDUFP+rOOa6boDAvQ79QsUoKx357xrYf5CPLNOv/tOsP96HHLGHSFfMYuolldWX5HlIAjeVwXecIEz45kyQ==
+  resolved "https://registry.yarnpkg.com/vinm-nodejs-emitter/-/vinm-nodejs-emitter-1.0.0.tgz#2a621bdd7caaad153a72c46ab168b30bc0f5ee26"
+  integrity sha512-I18qlkOuz+FUDSaV5SCwbiVM1okdUuY4QzK7T6uH8L6bk08Oi5h/sOXxjeLYc4qQiWu7tZHjuOya0hUeBis5iw==
   dependencies:
     socket.io-client "^2.2.0"
 
