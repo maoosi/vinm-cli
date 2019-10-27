@@ -17,8 +17,7 @@ Few things Vinm can help with:
 
 - [ ] Finish writing tests
 - [ ] Add examples for different use cases
-- [ ] Refactor and comment code 
-- [ ] Implement plugins system
+- [ ] Refactor and comment code
 
 
 ## 📦 CLI installation
