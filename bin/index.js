@@ -54,8 +54,8 @@ const exec = async () => {
     require('events').EventEmitter.defaultMaxListeners = 80
 
     try {
-        const config = await getVinmYmlFile()
-        config = await injectPlugins(config)
+        const initialConfig = await getVinmYmlFile()
+        const config = await injectPlugins(initialConfig)
         const options = await getStageVars(config, cli.flags['stage'])
         const forceAll = typeof cli.flags['force'] !== 'undefined'
             ? cli.flags['force']

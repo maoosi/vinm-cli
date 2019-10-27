@@ -1,18 +1,20 @@
 const path = require('path')
 
 exports.default = async (config) => {
-    return new Promise(async (resolve) => {
+    return new Promise(async (resolve, reject) => {
         if (typeof config.plugins !== 'undefined') {
             for (const plugin of config.plugins) {
                 let [pluginRelativePath, pluginInstance] = [false, false]
 
                 try {
-                    pluginRelativePath = plugin.startsWith('./')
+                    let regex = /^(.\/|..\/|\/).+/i
+                    pluginRelativePath = regex.test(plugin)
                     pluginInstance = pluginRelativePath
-                        ? require( path.join(process.cwd(), `${plugin}/index.js`) )
-                        : require( plugin )
+                        ? require(path.join(process.cwd(), `${plugin}/index.js`))
+                        : require(plugin)
                 } catch (err) {
-                    throw (`Plugin "${plugin}" doesn't exist, or badly formed.`)
+                    console.log(err)
+                    reject(`Plugin "${plugin}" doesn't exist, or badly formed.`)
                     break
                 }
 
@@ -20,8 +22,8 @@ exports.default = async (config) => {
                     config = await pluginInstance.plugin(
                         config,
                         pluginRelativePath
-                            ? path.join( process.cwd(), `${plugin}/index.js` )
-                            : path.join( 'node_modules', plugin )
+                            ? path.join(process.cwd(), `${plugin}/index.js`)
+                            : path.join('node_modules', plugin)
                     )
                 }
             }
