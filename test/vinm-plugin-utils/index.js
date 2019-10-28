@@ -27,12 +27,18 @@ module.exports.run = async (params) => {
     })
 }
 
-module.exports.plugin = async (vinmConfig, pluginPath) => {
-    return new Promise((resolve) => {
-        for (let task in vinmConfig.tasks) {
-            vinmConfig.tasks[task].shell =
-                vinmConfig.tasks[task].shell.replace('vinm@utils', `node ${pluginPath}`)
+module.exports.plugin = () => {
+
+    const afterReadYmlConfig = async ({ ymlConfig, pluginDirectory }) => {
+        for (let task in ymlConfig.tasks) {
+            ymlConfig.tasks[task].shell =
+                ymlConfig.tasks[task].shell.replace('vinm@utils', `node "${pluginDirectory}" run`)
         }
-        resolve(vinmConfig)
-    })
+        return Promise.resolve(ymlConfig)
+    }
+
+    return {
+        afterReadYmlConfig
+    }
+
 }

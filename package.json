@@ -2,7 +2,7 @@
     "name": "vinm-cli",
     "description": "Tiny CLI that help developers create robust execution pipelines.",
     "author": "maoosi <hello@sylvainsimao.fr>",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "repository": "https://gitlab.com/vinm/vinm-cli.git",
     "license": "MIT",
     "bin": {

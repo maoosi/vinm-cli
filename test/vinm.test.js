@@ -3,7 +3,7 @@ const path = require('path')
 
 // functions to test
 const getTasks = require('../bin/lib/tasks.js').default
-const injectPlugins = require('../bin/lib/plugins.js').default
+const loadPlugins = require('../bin/lib/plugins.js').default
 const getVinmYmlFile = require('../bin/lib/yml.js').default
 
 // store process
@@ -45,7 +45,9 @@ describe('Tasks', () => {
 describe('Plugins', () => {
 
     test('Plugin system should allow to modify tasks on-the-fly', async () => {
-        let tasks = await getTasks(await injectPlugins(config), 'test', {}, true)
+        let plugins = await loadPlugins(config)
+        let newConfig = await plugins.hook('afterReadYmlConfig', { ymlConfig: config })
+        let tasks = await getTasks(newConfig, 'test', {}, true)
         expect(tasks[0].shell).toEqual(expect.not.stringContaining('vinm@utils'))
     })
 
