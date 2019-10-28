@@ -13,7 +13,7 @@ exports.default = async (config) => {
                     pluginRelativePath = regex.test(plugin)
                     pluginModule = pluginRelativePath
                         ? require(path.join(process.cwd(), `${plugin}/index.js`))
-                        : require(plugin)
+                        : require(path.join(process.cwd(), 'node_modules', plugin))
                 } catch (err) {
                     console.log(err)
                     reject(`Plugin "${plugin}" doesn't exist, or badly formed.`)
@@ -26,7 +26,7 @@ exports.default = async (config) => {
                         instance: pluginModule.plugin(),
                         directory: pluginRelativePath
                             ? path.join(process.cwd(), `${plugin}/index.js`)
-                            : path.join('node_modules', plugin)
+                            : path.join(process.cwd(), 'node_modules', plugin)
                     })
                 }
             }
