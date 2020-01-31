@@ -86,7 +86,9 @@ const exec = async () => {
                 pipeline: pipeline,
                 tasks: await run(tasks, options)
             })
-            let error = reportResults[reportResults.length - 1].tasks.filter(t => !t.success).length
+            let error = reportResults[reportResults.length - 1].tasks.filter(
+                t => t.report !== 'success'
+            ).length
             logger.log(error ? 'warn' : 'success', `${pipeline}`, `[pipeline]`)
         }
 
@@ -94,14 +96,15 @@ const exec = async () => {
         console.log('')
         logger.log('log', `\n$ Vinm CLI, report summary:`)
         reportResults.forEach(p => {
-            let [passed, failed, total] = [0, 0, 0]
+            let [passed, aborted, failed, total] = [0, 0, 0, 0]
             p.tasks.forEach(t => {
-                if (t.success) passed++
+                if (t.report === 'success') passed++
+                else if (t.report === 'aborted') aborted++
                 else failed++
                 total++
             })
-            reportSummary += `\nPipeline [${p.pipeline}]: ${passed} passed, ${failed} failed, ${total} total`
-            logger.log(failed > 0 ? 'error' : 'success', reportSummary)
+            reportSummary += `\nPipeline [${p.pipeline}]: ${passed} passed, ${aborted} aborted, ${failed} failed, ${total} total`
+            logger.log(passed !== total ? 'error' : 'success', reportSummary)
         })
 
         process.exit()
