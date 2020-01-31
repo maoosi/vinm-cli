@@ -16,7 +16,6 @@ const cli = meow(`
 
 	Options
       --stage, -s     Stage vars to use
-      --port, -p      Vinm emitter port    # optional
       --force, -f     Force run all tasks  # optional
       --help, -h      Show help            # optional
       --version, -v   Current version      # optional 
@@ -29,10 +28,6 @@ const cli = meow(`
         stage: {
             type: 'string',
             alias: 's'
-        },
-        port: {
-            type: 'string',
-            alias: 'p'
         },
         force: {
             type: 'boolean',
@@ -61,10 +56,6 @@ const exec = async () => {
         const forceAll = typeof cli.flags['force'] !== 'undefined'
             ? cli.flags['force']
             : false
-
-        options['vinm.port'] = typeof cli.flags['port'] !== 'undefined'
-            ? cli.flags['port']
-            : 4173
 
         let reportResults = []
         console.log('')

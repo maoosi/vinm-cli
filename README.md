@@ -15,9 +15,8 @@ Few things Vinm can help with:
 
 ## ✔️ Roadmap
 
-- [ ] Finish writing tests
-- [ ] Add examples for different use cases
-- [ ] Refactor and comment code
+- [ ] Write better tests
+- [ ] Add examples for different use cases (AWS CDK, ...)
 
 
 ## 📦 CLI installation
@@ -70,7 +69,6 @@ Usage
 
 Options
     --stage, -s     Stage vars to use
-    --port, -p      Vinm emitter port    # optional
     --force, -f     Force run all tasks  # optional
     --help, -h      Show help            # optional
     --version, -v   Current version      # optional 
