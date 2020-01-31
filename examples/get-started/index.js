@@ -9,9 +9,6 @@ module.exports.myip = async () => {
     // send it to Vinm
     vinm('ip', myip)
 
-    // exit
-    process.exit()
-
 }
 
 module.exports.wait = async (seconds) => {
@@ -22,8 +19,5 @@ module.exports.wait = async (seconds) => {
             resolve(true)
         }, seconds)
     })
-
-    // exit
-    process.exit()
 
 }

@@ -29,7 +29,9 @@ const getTasks = (tasks, config, options, forceAll) => {
                 let isConditionMet = typeof task.condition === 'undefined' || eval( vinmVars(task.condition, options) )
 
                 if ((isActive || forceAll) && isConditionMet) {
-                    let pipelineTasks = getTasks(config.pipelines[task.pipeline], config, options, forceAll)
+                    let pipelineTasks = getTasks(
+                        config.pipelines[task.pipeline], config, options, forceAll
+                    )
                     runTasks = runTasks.concat(pipelineTasks)
                 }
             }
@@ -49,7 +51,9 @@ exports.default = (config, pipeline, options, forceAll = false) => {
     return new Promise(async (resolve, reject) => {
         if (typeof config.pipelines[pipeline] !== 'undefined') {
             try {
-                let tasks = flattenDeep( getTasks(config.pipelines[pipeline], config, options, forceAll) )
+                let tasks = flattenDeep( 
+                    getTasks(config.pipelines[pipeline], config, options, forceAll)
+                )
                 resolve(tasks)
             } catch (err) {
                 reject(err)
