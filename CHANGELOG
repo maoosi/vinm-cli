@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.0.0]
+
+### Added
+- Plugins support added.
+
+### Changed/Fixed
+- Dependencies updated to latest versions.
+- Better support for AWS CDK CLI (https://gitlab.com/vinm/vinm-cli/-/issues/2).
+- Ability to run multiple pipelines in parallel (https://gitlab.com/vinm/vinm-cli/-/issues/1).
+- Logs output improved.
+
+### Removed
+- Socket.io dependency removed.
+- Vinm emitter port (--port option) removed.
+
+
 ## [1.1.3]
 
 >  Plugins support still in preview

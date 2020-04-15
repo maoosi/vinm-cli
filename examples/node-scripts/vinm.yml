@@ -1,6 +1,6 @@
-#   Basic example
+#   Node scripts example
 #   ------
-#   Run via: `vinm basic --stage dev`
+#   Run via: `vinm node-scripts --stage dev`
 
 stages:
     dev:
@@ -11,7 +11,7 @@ stages:
         delay: 5000
 
 pipelines:
-    basic:
+    node-scripts:
         - task: exec-myip
         - task: wait-three-seconds
         - task: wait-three-seconds

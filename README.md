@@ -10,13 +10,7 @@ Few things Vinm can help with:
 
 - Build and deploy a fleet of services via a single command.
 - Easily manage infrastructure as code for decoupled architectures.
-- Orchestrate deployments for Serverless / AWS SAM / CloudFormation templates.
-
-
-## ✔️ Roadmap
-
-- [ ] Write better tests
-- [ ] Add examples for different use cases (AWS CDK, ...)
+- Orchestrate deployments for Serverless, AWS CDK and more.
 
 
 ## 📦 CLI installation
@@ -87,10 +81,10 @@ vinm helloworld --stage staging
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome.
+Contributions, issues and feature requests are welcome on the [Gitlab repository](https://gitlab.com/vinm/vinm-cli).
 
 
 ## 📝 License
 
-Copyright © 2019 [maoosi](https://gitlab.com/maoosi).<br />
+Copyright © 2020 [maoosi](https://gitlab.com/maoosi).<br />
 This project is [MIT](./LICENSE) licensed.
