@@ -62,20 +62,20 @@ Usage
     $ vinm @<task> <options>
 
 Options
-    --stage, -s     Stage vars to use
+    --stage, -s     Stage vars to use    # optional
     --force, -f     Force run all tasks  # optional
     --help, -h      Show help            # optional
     --version, -v   Current version      # optional 
 
 Examples
-    $ vinm deploy --stage dev       # run 'deploy' pipeline
-    $ vinm @api-create --stage dev  # run 'api-create' task
+    $ vinm deploy                        # run 'deploy' pipeline
+    $ vinm @api-create                   # run 'api-create' task
 ```
 
 Sample:
 
 ```sh
-vinm helloworld --stage staging
+vinm helloworld
 ```
 
 

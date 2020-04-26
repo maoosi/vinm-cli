@@ -6,18 +6,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.0.1]
+
+### Changed
+
+- `--stage` option made optional
+
+### Added
+
+- If no stage provided, user is prompted with an interactive selector
+
+
 ## [2.0.0]
 
 ### Added
+
 - Plugins support added.
 
 ### Changed/Fixed
+
 - Dependencies updated to latest versions.
 - Better support for AWS CDK CLI (https://gitlab.com/vinm/vinm-cli/-/issues/2).
 - Ability to run multiple pipelines in parallel (https://gitlab.com/vinm/vinm-cli/-/issues/1).
 - Logs output improved.
 
 ### Removed
+
 - Socket.io dependency removed.
 - Vinm emitter port (--port option) removed.
 
@@ -27,25 +41,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 >  Plugins support still in preview
 
 ### Changed
+
 - Bug fix - error when loading plugins from node_modules
 
 
 ## [1.1.2]
 
 ### Added
+
 - Plugins support added (preview only)
 
 
 ## [1.1.1]
 
 ### Changed
+
 - Bug fix "Assignment to constant variable."
 
 
 ## [1.1.0]
 
 ### Added
+
 - Tasks/pipelines report summary after execution
 
 ### Changed
+
 - Bug fix with --force option

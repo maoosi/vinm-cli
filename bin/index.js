@@ -2,6 +2,7 @@
 'use strict'
 
 const meow = require('meow')
+const inquirer = require('inquirer')
 const logger = require('./lib/logger.js')
 const getVinmYmlFile = require('./lib/yml.js').default
 const getStageVars = require('./lib/options.js').default
@@ -15,19 +16,20 @@ const cli = meow(`
       $ vinm @<task> <options>
 
 	Options
-      --stage, -s     Stage vars to use
+      --stage, -s     Stage vars to use    # optional
       --force, -f     Force run all tasks  # optional
       --help, -h      Show help            # optional
       --version, -v   Current version      # optional 
 
 	Examples
-      $ vinm deploy --stage dev       # run 'deploy' pipeline
-      $ vinm @api-create --stage dev  # run 'api-create' task
+      $ vinm deploy           # run 'deploy' pipeline
+      $ vinm @api-create      # run 'api-create' task
 `, {
     flags: {
         stage: {
             type: 'string',
-            alias: 's'
+            alias: 's',
+            default: ''
         },
         force: {
             type: 'boolean',
@@ -52,7 +54,28 @@ const exec = async () => {
         const ymlConfig = await getVinmYmlFile()
         const plugins = await loadPlugins(ymlConfig)
         const config = await plugins.hook('afterReadYmlConfig', { ymlConfig })
-        const options = await getStageVars(config, cli.flags['stage'])
+
+        let selectedStage
+        let allStages = Object.keys(config.stages)
+
+        if (cli.flags['stage'].length < 1) {
+            let response = await inquirer.prompt([
+                {
+                    type: 'list',
+                    name: 'value',
+                    message: 'What stage do you want to run?',
+                    choices: allStages,
+                    default: allStages[0]
+                }
+            ])
+            selectedStage = response.value
+        } else {
+            selectedStage = cli.flags['stage']
+        }
+
+        console.log(selectedStage)
+
+        const options = await getStageVars(config, selectedStage)
         const forceAll = typeof cli.flags['force'] !== 'undefined'
             ? cli.flags['force']
             : false
@@ -111,7 +134,6 @@ if (typeof cli.flags['version'] !== 'undefined') {
     process.exit()
 } else if (
     cli.input.length > 0 &&
-    typeof cli.flags['stage'] !== 'undefined' &&
     typeof cli.flags['help'] === 'undefined'
 ) {
     exec()
